@@ -3,7 +3,7 @@ const express = require('express');
 const socketio = require('socket.io');
 const http = require('http');
 
-var {generateMessage} = require('./utils/message');
+var {generateMessage, generateLocationMessage} = require('./utils/message');
 const port = process.env.PORT || 3000;
 var public_path = path.join( __dirname , '../public');
 var app = express();
@@ -21,14 +21,15 @@ socket.broadcast.emit('newMessage',generateMessage('Admin','New user joined.'));
 
 socket.on('createMessage',(data , callback)=>{
 console.log('Create Message:',data);
-io.emit('newMessage',generateMessage(data.from,data.text));
+io.emit('newLocationMessage',generateMessage(data.from,data.text));
 callback('This is from server ');
-// socket.broadcast.emit('newMessage',{
-//     from: data.from,
-//     text: data.text,
-//     createdAt: new Date().getTime()
-// });
 });
+
+socket.on('locationMessage', (coords)=>{
+io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude ,coords.longitude));
+});
+
+
 
 socket.on('disconnect',()=>{
     console.log('disconnected from serve');
