@@ -14,3 +14,5 @@ console.log('new Email.',email);
 socket.on('newMessage',function(message){
 console.log('New Message: ',message);
 });
+
+//socket.emit('createMessage',{from:'sdsddfsf',text:'sdacaaaa svsfsv '});

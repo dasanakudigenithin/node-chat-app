@@ -12,9 +12,16 @@ var io = socketio(server);
 io.on('connection',(socket)=>{
 console.log('new user connected.');
 
-socket.emit('newEmail',{
-    from : 'nithin.kk.com',
-    text: 'HOW YOU DOING?'
+
+socket.emit('newMessage',{
+    from: 'Admin',
+    text: 'Welcome New User',
+    createdAt: new Date().getTime()
+});
+
+socket.broadcast.emit('newMessage',{
+    from: 'Admin',
+    text: 'New user joined.',
 });
 
 
@@ -25,6 +32,12 @@ io.emit('newMessage',{
     text: data.text,
     createdAt: new Date().getTime()
 });
+
+// socket.broadcast.emit('newMessage',{
+//     from: data.from,
+//     text: data.text,
+//     createdAt: new Date().getTime()
+// });
 });
 
 socket.on('disconnect',()=>{
