@@ -17,14 +17,14 @@ socket.emit('newEmail',{
     text: 'HOW YOU DOING?'
 });
 
-socket.emit('newMessage',{
-from: 'from who?',
-text: 'what text of the message',
-createdAt: 'time of the message'
-});
 
 socket.on('createMessage',(data)=>{
 console.log('Create Message:',data);
+io.emit('newMessage',{
+    from: data.from,
+    text: data.text,
+    createdAt: new Date().getTime()
+});
 });
 
 socket.on('disconnect',()=>{
