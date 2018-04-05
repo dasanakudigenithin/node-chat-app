@@ -11,6 +11,22 @@ var io = socketio(server);
 
 io.on('connection',(socket)=>{
 console.log('new user connected.');
+
+socket.emit('newEmail',{
+    from : 'nithin.kk.com',
+    text: 'HOW YOU DOING?'
+});
+
+socket.emit('newMessage',{
+from: 'from who?',
+text: 'what text of the message',
+createdAt: 'time of the message'
+});
+
+socket.on('createMessage',(data)=>{
+console.log('Create Message:',data);
+});
+
 socket.on('disconnect',()=>{
     console.log('disconnected from serve');
 });
