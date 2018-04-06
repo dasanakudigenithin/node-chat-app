@@ -2,17 +2,25 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="./css/style.css">
     </head>
-    <body>
-        <p>
-            Hello there...!!!
-        </p>
-        <form id="messageForm">
-            <input type="text" name="message" placeholder="Enter text here">
-            <button>Send</button>
-            <ol id="messages"></ol>
-        </form>
-        <button id="location">Send Location</button>
+    <body class="chat">
+        <div class="chat__sidebar">
+                <h3>Users</h3>
+                <div class="users"></div>
+        </div>
+
+        <div class="chat__main">
+            <ol id="messages" class="chat__messages"></ol>
+            <div class="chat__footer">
+                 <form id="messageForm">
+                  <input type="text" name="message" placeholder="Enter text here" autofocus autocomplete="off">
+                  <button>Send</button>
+                </form>
+                <button id="location">Send Location</button>
+            </div>
+        </div>
+        
         <script src="/socket.io/socket.io.js"></script>
         <script src="/js/libs/jquery-3.3.1.min.js"></script>
         <script src="./js/index.js"></script>
